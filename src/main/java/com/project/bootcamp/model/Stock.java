@@ -1,31 +1,33 @@
-package com.project.bootcamp.model.dto;
+package com.project.bootcamp.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.time.LocalDate;
 
-public class StockDTO {
+@Entity
+@Table(name = "tb_stock")
+public class Stock {
 
+    @Id // Primary Key no banco
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Ou GenerationType.IDENTITY se a coluna no banco tiver AUTO_INCREMENT
     private Long id;
 
-    @NotNull
     private String name;
 
-    @NotNull
-    @DecimalMin("0.00")
-    @Digits(integer=6, fraction = 2)
     private Double price;
 
-    @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    private LocalDate date;
-
-    @NotNull
-    @Digits(integer = 3, fraction = 2)
     private Double variation;
+
+    public Stock(){
+
+    }
+    public Stock(String name, Double price, Double variation, LocalDate date) {
+        this.name = name;
+        this.price = price;
+        this.variation = variation;
+        this.date = date;
+    }
+
+    private LocalDate date;
 
     public Long getId() {
         return id;
@@ -51,19 +53,19 @@ public class StockDTO {
         this.price = price;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     public Double getVariation() {
         return variation;
     }
 
     public void setVariation(Double variation) {
         this.variation = variation;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
