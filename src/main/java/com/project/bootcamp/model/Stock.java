@@ -4,11 +4,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tb_stock")
 public class Stock {
 
     @Id // Primary Key no banco
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Ou GenerationType.IDENTITY se a coluna no banco tiver AUTO_INCREMENT
+    @GeneratedValue(strategy = GenerationType.AUTO) // Ou GenerationType.IDENTITY se a coluna no banco tiver AUTO_INCREMENT
     private Long id;
 
     private String name;
@@ -16,16 +15,6 @@ public class Stock {
     private Double price;
 
     private Double variation;
-
-    public Stock(){
-
-    }
-    public Stock(String name, Double price, Double variation, LocalDate date) {
-        this.name = name;
-        this.price = price;
-        this.variation = variation;
-        this.date = date;
-    }
 
     private LocalDate date;
 
